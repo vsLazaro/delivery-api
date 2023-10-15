@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
 @Component
-public class RepostorioCEP implements ICepRepository {
+public class RepositoryCEP implements ICepRepository {
 
     @Override
     public String getCityNameByCep(String cep) {
