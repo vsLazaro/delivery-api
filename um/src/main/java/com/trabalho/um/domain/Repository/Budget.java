@@ -15,7 +15,19 @@ public class Budget {
   private double discount;
   private final String PRINCIPAL_CITY = "São Paulo";
 
-  public Budget() {}
+  public Budget(int id, Date date, City originCity, City destinyCity, int weight, double discount) {
+    this.id = id;
+    this.date = date;
+    this.originCity = originCity;
+    this.destinyCity = destinyCity;
+    weight = this.transformMgToKg(weight);
+    this.weight = weight;
+    this.discount = discount;
+    this.calculateAdicionalCostByweight(this.weight);
+    this.calculateBasicCost();
+    this.calculateTaxCost();
+
+  }
 
   public void calculateBasicCost() {
     if (
@@ -65,4 +77,27 @@ public class Budget {
   public double getFinalCost() {
     return 0.0;
   }
+
+  public int getId(){
+    return id;
+  }
+  
+  public void setId(int i){
+    this.id = id;
+  }
+
+public Object getName() {
+    return null;
+}
+
+public Object getValue() {
+    return null;
+}
+
+public void setName(Object name) {
+}
+
+public void setValue(Object value) {
+}
+
 }

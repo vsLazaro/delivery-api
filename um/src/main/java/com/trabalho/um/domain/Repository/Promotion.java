@@ -11,7 +11,7 @@ public class Promotion {
     private boolean valid;
 
     public Promotion(String description, double basicDiscount, double additionalDiscount, City city, int minWeight,
-            int maxWeight) {
+        int maxWeight, int id) {
         this.description = description;
         this.basicDiscount = basicDiscount;
         this.additionalDiscount = additionalDiscount;
@@ -19,6 +19,7 @@ public class Promotion {
         this.minWeight = minWeight;
         this.maxWeight = maxWeight;
         this.valid = true;
+        this.id = id;
     }
 
     public boolean isValid() {
@@ -29,4 +30,15 @@ public class Promotion {
         this.valid = valid;
     }
 
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public City getcity() {
+        return this.city;
+    }
 }

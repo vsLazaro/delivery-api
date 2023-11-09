@@ -19,4 +19,14 @@ public class City {
     {
         return this.cost;
     }
+
+    public Object getPromocoes() {
+        return null;
+    }
+
+    public Object getPromotion() {
+        return null;
+    }
+
+    
 }
