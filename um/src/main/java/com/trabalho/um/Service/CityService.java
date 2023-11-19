@@ -1,11 +1,11 @@
-package com.trabalho.um.domain.Service;
+package com.trabalho.um.Service;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.trabalho.um.domain.Repository.ICepRepository;
-import com.trabalho.um.domain.Repository.ICitiesRepository;
+import com.trabalho.um.Repository.ICepRepository;
+import com.trabalho.um.Repository.ICitiesRepository;
 import com.trabalho.um.domain.model.City;
 
 @Service

@@ -1,26 +1,23 @@
 package com.trabalho.um.Controllers;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.trabalho.um.DTO.CreateBudgetDTO;
 import com.trabalho.um.DTO.ReadBudgetByDateDTO;
-import com.trabalho.um.domain.Service.BudgetService;
+import com.trabalho.um.Service.IBudgetService;
 import com.trabalho.um.domain.model.Budget;
 
 @RestController
 @RequestMapping("/budgets")
 public class BudgetController {
 
-    private BudgetService service;
+    private IBudgetService service;
 
-    public BudgetController(BudgetService service) {
+    public BudgetController(IBudgetService service) {
       this.service = service;
     }
 

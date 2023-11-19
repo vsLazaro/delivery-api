@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trabalho.um.domain.Service.CityService;
+import com.trabalho.um.Service.CityService;
 import com.trabalho.um.domain.model.City;
 
 

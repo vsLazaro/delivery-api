@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Repository;
+package com.trabalho.um.Repository;
 
 import java.util.Date;
 import java.util.List;

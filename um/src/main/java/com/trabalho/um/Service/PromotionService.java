@@ -1,7 +1,7 @@
-package com.trabalho.um.domain.Service;
+package com.trabalho.um.Service;
 
 import com.trabalho.um.DTO.CreatePromotionDTO;
-import com.trabalho.um.domain.Repository.IPromotionRepository;
+import com.trabalho.um.Repository.IPromotionRepository;
 import com.trabalho.um.domain.model.City;
 import com.trabalho.um.domain.model.Promotion;
 

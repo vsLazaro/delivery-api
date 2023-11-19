@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Service;
+package com.trabalho.um.Service;
 
 import java.util.ArrayList;
 

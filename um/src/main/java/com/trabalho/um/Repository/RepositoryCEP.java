@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Repository;
+package com.trabalho.um.Repository;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

@@ -1,19 +1,18 @@
-package com.trabalho.um.domain.Service;
+package com.trabalho.um.Service;
 
 import org.springframework.stereotype.Service;
 
 import com.trabalho.um.DTO.CreateBudgetDTO;
-import com.trabalho.um.domain.Repository.IBudgetRepository;
+import com.trabalho.um.Repository.IBudgetRepository;
 import com.trabalho.um.domain.model.Budget;
 import com.trabalho.um.domain.model.City;
 import com.trabalho.um.domain.model.Promotion;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Service
-public class BudgetService {
+public class BudgetService implements IBudgetService {
 
     private int nextId = 1;
     private ICityService cityService;

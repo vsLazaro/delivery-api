@@ -5,19 +5,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.trabalho.um.DTO.CreatePromotionDTO;
-import com.trabalho.um.domain.Service.PromotionService;
+import com.trabalho.um.Service.IPromotionService;
 import com.trabalho.um.domain.model.Promotion;
 
-import java.util.HashMap;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/promotions")
 public class PromotionController {
 
-    private PromotionService promotionService;
+    private IPromotionService promotionService;
 
-    public PromotionController(PromotionService promotionService) {
+    public PromotionController(IPromotionService promotionService) {
         this.promotionService = promotionService;
     }
 

@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Repository;
+package com.trabalho.um.Repository;
 
 public interface ICepRepository {
     public String getCityNameByCep(String cep);
