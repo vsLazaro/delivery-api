@@ -9,13 +9,10 @@ import com.trabalho.um.domain.entity.CityJPA;
 import com.trabalho.um.domain.entity.PromotionJPA;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class BudgetService implements IBudgetService {
-
-    private int nextId = 1;
     private ICityService cityService;
     private IBudgetRepository budgetRepository;
 
@@ -43,8 +40,6 @@ public class BudgetService implements IBudgetService {
             int adicionalCost = this.calculateAdicionalCostByweight(weight, 0);
             double taxCost = this.calculateTaxCost(originCity, destinCity, basicCost);
             PromotionJPA promotion = this.getPromotion(originCity);
-            int id = nextId;
-            nextId++;
             double discount = 0.0;
             if(promotion != null && weight >= promotion.getMinWeight() && weight <= promotion.getMaxWeight()) {
               discount += promotion.getBasicDiscount() + promotion.getAdditionalDiscount();

@@ -80,4 +80,8 @@ public class PromotionJPA {
     {
         return this.maxWeight;
     }
+
+    public String getDescription() {
+        return this.description;
+    }
 }
