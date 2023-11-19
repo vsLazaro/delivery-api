@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.trabalho.um.Repository.ICepRepository;
 import com.trabalho.um.Repository.ICitiesRepository;
-import com.trabalho.um.domain.model.City;
+import com.trabalho.um.domain.entity.CityJPA;
 
 @Service
 public class CityService implements ICityService {
@@ -23,7 +23,7 @@ public class CityService implements ICityService {
   {
     try {
       String city = this.cepRepository.getCityNameByCep(cep);
-      City objCity = this.citiesRepository.getCityByName(city);
+      CityJPA objCity = this.citiesRepository.getCityByName(city);
       if(objCity.getName().length() > 0) {
         return true;
       } 
@@ -34,12 +34,12 @@ public class CityService implements ICityService {
     }
   }
 
-  public ArrayList<City> getServedCities()
+  public ArrayList<CityJPA> getServedCities()
   {
     return this.citiesRepository.getAllCities();
   }
 
-  public City getCityByCep(String cep) throws Exception
+  public CityJPA getCityByCep(String cep) throws Exception
   {
     try {
       if(!this.cepIsServed(cep)) {
@@ -52,7 +52,7 @@ public class CityService implements ICityService {
     }
   }
 
-  public City geCityByName(String name) throws Exception
+  public CityJPA geCityByName(String name) throws Exception
   {
     try {
       return this.citiesRepository.getCityByName(name);

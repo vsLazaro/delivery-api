@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.trabalho.um.DTO.CreatePromotionDTO;
 import com.trabalho.um.Service.IPromotionService;
-import com.trabalho.um.domain.model.Promotion;
+import com.trabalho.um.domain.entity.PromotionJPA;
 
 
 import java.util.List;
@@ -22,16 +22,16 @@ public class PromotionController {
     }
 
      @GetMapping({"/valid"})
-    public ResponseEntity<List<Promotion>> cepIsServed()
+    public ResponseEntity<List<PromotionJPA>> cepIsServed()
     {
-        return new ResponseEntity<List<Promotion>>(this.promotionService.getValidPromotions(), HttpStatus.OK);
+        return new ResponseEntity<List<PromotionJPA>>(this.promotionService.getValidPromotions(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Promotion> createPromotion(@RequestBody CreatePromotionDTO promotion) {
+    public ResponseEntity<PromotionJPA> createPromotion(@RequestBody CreatePromotionDTO promotion) {
         try {
-            Promotion createdPromotion = promotionService.createPromotion(promotion);
-            return new ResponseEntity<>(createdPromotion, HttpStatus.CREATED);
+            PromotionJPA createdPromotion = promotionService.createPromotion(promotion);
+            return new ResponseEntity<PromotionJPA>(createdPromotion, HttpStatus.CREATED);
         } catch(Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

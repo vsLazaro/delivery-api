@@ -1,4 +1,4 @@
-package com.trabalho.um.Repository;
+package com.trabalho.um.Repository.Util;
 
 /**
  * ViaCEPResponse

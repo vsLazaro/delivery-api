@@ -4,10 +4,11 @@ import org.springframework.stereotype.Service;
 
 import com.trabalho.um.DTO.CreateBudgetDTO;
 import com.trabalho.um.Repository.IBudgetRepository;
-import com.trabalho.um.domain.model.Budget;
-import com.trabalho.um.domain.model.City;
-import com.trabalho.um.domain.model.Promotion;
+import com.trabalho.um.domain.entity.BudgetJPA;
+import com.trabalho.um.domain.entity.CityJPA;
+import com.trabalho.um.domain.entity.PromotionJPA;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,21 +28,21 @@ public class BudgetService implements IBudgetService {
         this.promotionService = promotionService;
     }
 
-    public List<Budget> getAllBudgets() {
+    public List<BudgetJPA> getAllBudgets() {
       return this.budgetRepository.getAllBudgets();
     }
 
-    public Budget createBudget(CreateBudgetDTO budgetDTO) throws Exception {
+    public BudgetJPA createBudget(CreateBudgetDTO budgetDTO) throws Exception {
         try {
-            City originCity = this.cityService.getCityByCep(budgetDTO.cepOrigin);
-            City destinCity = this.cityService.getCityByCep(budgetDTO.cepDestiny);
-            Date date = new Date();
+            CityJPA originCity = this.cityService.getCityByCep(budgetDTO.cepOrigin);
+            CityJPA destinCity = this.cityService.getCityByCep(budgetDTO.cepDestiny);
+            LocalDate date = LocalDate.now();
 
             double basicCost = this.calculateBasicCost(originCity, destinCity);
             int weight = this.transformMgToKg(budgetDTO.weight);
             int adicionalCost = this.calculateAdicionalCostByweight(weight, 0);
             double taxCost = this.calculateTaxCost(originCity, destinCity, basicCost);
-            Promotion promotion = this.getPromotion(originCity);
+            PromotionJPA promotion = this.getPromotion(originCity);
             int id = nextId;
             nextId++;
             double discount = 0.0;
@@ -49,7 +50,7 @@ public class BudgetService implements IBudgetService {
               discount += promotion.getBasicDiscount() + promotion.getAdditionalDiscount();
             }
             
-            Budget budget = new Budget(id, date, originCity.getName(), destinCity.getName(), weight, basicCost, adicionalCost, taxCost, discount);
+            BudgetJPA budget = new BudgetJPA(date, originCity.getName(), destinCity.getName(), weight, basicCost, adicionalCost, taxCost, discount);
             this.budgetRepository.createBudget(budget);
             return budget;
         } catch (Exception e) {
@@ -57,12 +58,12 @@ public class BudgetService implements IBudgetService {
         }
     }
 
-    private Promotion getPromotion(City originCity) {
-      Promotion promotion = this.promotionService.hasPromotion(originCity);
+    private PromotionJPA getPromotion(CityJPA originCity) {
+      PromotionJPA promotion = this.promotionService.hasPromotion(originCity);
       return promotion;
     }
 
-    private double calculateBasicCost(City originCity, City destinCity) 
+    private double calculateBasicCost(CityJPA originCity, CityJPA destinCity) 
     {
         if (
           destinCity.getName().equals(this.PRINCIPAL_CITY) ||
@@ -94,7 +95,7 @@ public class BudgetService implements IBudgetService {
         return adicionalCost;
     }
 
-    private double calculateTaxCost(City originCity, City destinyCity, double basicCost) {
+    private double calculateTaxCost(CityJPA originCity, CityJPA destinyCity, double basicCost) {
         if (originCity.getName().equals(destinyCity.getName())) {
           return 0.05 * basicCost;
         }
@@ -104,7 +105,7 @@ public class BudgetService implements IBudgetService {
         return 0.05 * originCity.getCost() + 0.05 * originCity.getCost();
     }
 
-    public Budget getBudgetByDate(Date date) {
+    public List<BudgetJPA> getBudgetByDate(LocalDate date) {
       return this.budgetRepository.getBudgetByDate(date);
     }
 }

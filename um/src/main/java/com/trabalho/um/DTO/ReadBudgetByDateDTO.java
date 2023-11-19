@@ -1,7 +1,7 @@
 package com.trabalho.um.DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ReadBudgetByDateDTO {
-  public Date date;
+  public LocalDate date;
 }

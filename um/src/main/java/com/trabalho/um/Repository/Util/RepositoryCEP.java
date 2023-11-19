@@ -1,4 +1,4 @@
-package com.trabalho.um.Repository;
+package com.trabalho.um.Repository.Util;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -9,6 +9,7 @@ import java.net.URL;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
+import com.trabalho.um.Repository.ICepRepository;
 
 @Component
 public class RepositoryCEP implements ICepRepository {

@@ -1,11 +1,22 @@
-package com.trabalho.um.domain.model;
+package com.trabalho.um.domain.entity;
 
+
+import java.time.LocalDate;
 import java.util.Date;
 
-public class Budget {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "budget")
+public class BudgetJPA {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-  private Date date;
+  private LocalDate date;
   private String originCity;
   private String destinyCity;
   private int weight;
@@ -15,9 +26,8 @@ public class Budget {
   private double discount;
   private double totalCost;
 
-  public Budget(int id, Date date, String originCity, String destinyCity, int weight, double basicCost,
-      double adicionalCost, double taxCost, double discount) {
-    this.id = id;
+  public BudgetJPA(LocalDate date, String originCity, String destinyCity, int weight, double basicCost,
+  double adicionalCost, double taxCost, double discount) {
     this.date = date;
     this.originCity = originCity;
     this.destinyCity = destinyCity;
@@ -29,6 +39,10 @@ public class Budget {
     this.totalCost = this.basicCost + this.adicionalCost + this.taxCost - this.discount;
   }
 
+  protected BudgetJPA() {
+
+  }
+
   public double getTotalCost() {
     return this.totalCost;
   }
@@ -37,7 +51,7 @@ public class Budget {
     return id;
   }
 
-  public Date getDate() {
+  public LocalDate getDate() {
     return date;
   }
 

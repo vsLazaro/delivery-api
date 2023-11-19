@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trabalho.um.Service.CityService;
-import com.trabalho.um.domain.model.City;
+import com.trabalho.um.domain.entity.CityJPA;
 
 
 @RestController
@@ -26,9 +26,9 @@ public class CityController {
   }
 
   @GetMapping()
-  public ResponseEntity<ArrayList<City>> getCities()
+  public ResponseEntity<ArrayList<CityJPA>> getCities()
   {
-    return new ResponseEntity<ArrayList<City>>(this.service.getServedCities(), HttpStatus.OK);
+    return new ResponseEntity<ArrayList<CityJPA>>(this.service.getServedCities(), HttpStatus.OK);
   }
 
   @GetMapping({"/cep/{cep}"})

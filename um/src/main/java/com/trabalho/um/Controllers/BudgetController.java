@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.trabalho.um.DTO.CreateBudgetDTO;
 import com.trabalho.um.DTO.ReadBudgetByDateDTO;
 import com.trabalho.um.Service.IBudgetService;
-import com.trabalho.um.domain.model.Budget;
+import com.trabalho.um.domain.entity.BudgetJPA;
 
 @RestController
 @RequestMapping("/budgets")
@@ -22,19 +22,19 @@ public class BudgetController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Budget>> getBudget() {
-        return new ResponseEntity<List<Budget>>(this.service.getAllBudgets(), HttpStatus.OK);
+    public ResponseEntity<List<BudgetJPA>> getBudget() {
+        return new ResponseEntity<List<BudgetJPA>>(this.service.getAllBudgets(), HttpStatus.OK);
     }
 
     @GetMapping({"/date"})
-    public ResponseEntity<Budget> getBudgetByDate(@RequestBody ReadBudgetByDateDTO dateDTO) {
-        return new ResponseEntity<Budget>(this.service.getBudgetByDate(dateDTO.date), HttpStatus.CREATED); 
+    public ResponseEntity<List<BudgetJPA>> getBudgetByDate(@RequestBody ReadBudgetByDateDTO dateDTO) {
+        return new ResponseEntity<List<BudgetJPA>>(this.service.getBudgetByDate(dateDTO.date), HttpStatus.CREATED); 
     }
 
     @PostMapping
     public ResponseEntity<String> createBudget(@RequestBody CreateBudgetDTO budgetDTO) {
         try {
-            Budget budget = this.service.createBudget(budgetDTO);
+            BudgetJPA budget = this.service.createBudget(budgetDTO);
             return new ResponseEntity<>(Double.toString(budget.getTotalCost()), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

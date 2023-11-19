@@ -1,13 +1,12 @@
 package com.trabalho.um.Repository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
-import com.trabalho.um.domain.model.Budget;
-import com.trabalho.um.domain.model.City;
+import com.trabalho.um.domain.entity.BudgetJPA;
 
 public interface IBudgetRepository {
-  public void createBudget(Budget budget);
-  public List<Budget> getAllBudgets();
-  public Budget getBudgetByDate(Date date);
+  public void createBudget(BudgetJPA budget);
+  public List<BudgetJPA> getAllBudgets();
+  public List<BudgetJPA> getBudgetByDate(LocalDate date);
 }

@@ -1,7 +1,5 @@
 package com.trabalho.um.DTO;
 
-import com.trabalho.um.domain.model.City;
-
 public class CreatePromotionDTO {
   public String description;
   public double basicDiscount;
