@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Repository;
+package com.trabalho.um.domain.model;
 
 public class City {
     String name;
@@ -18,15 +18,5 @@ public class City {
     public double getCost()
     {
         return this.cost;
-    }
-
-    public Object getPromocoes() {
-        return null;
-    }
-
-    public Object getPromotion() {
-        return null;
-    }
-
-    
+    }    
 }

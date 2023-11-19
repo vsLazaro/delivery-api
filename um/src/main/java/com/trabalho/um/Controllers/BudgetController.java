@@ -1,10 +1,18 @@
 package com.trabalho.um.Controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.trabalho.um.domain.Repository.Budget;
+
+import com.trabalho.um.DTO.CreateBudgetDTO;
+import com.trabalho.um.DTO.ReadBudgetByDateDTO;
 import com.trabalho.um.domain.Service.BudgetService;
+import com.trabalho.um.domain.model.Budget;
 
 @RestController
 @RequestMapping("/budgets")
@@ -15,28 +23,25 @@ public class BudgetController {
     public BudgetController(BudgetService service) {
       this.service = service;
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<Budget> getBudgetById(@PathVariable int id) {
-        Budget budget = service.getBudgetById(id);
-        if (budget != null) {
-            return new ResponseEntity<>(budget, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+
+    @GetMapping
+    public ResponseEntity<List<Budget>> getBudget() {
+        return new ResponseEntity<List<Budget>>(this.service.getAllBudgets(), HttpStatus.OK);
+    }
+
+    @GetMapping({"/date"})
+    public ResponseEntity<Budget> getBudgetByDate(@RequestBody ReadBudgetByDateDTO dateDTO) {
+        return new ResponseEntity<Budget>(this.service.getBudgetByDate(dateDTO.date), HttpStatus.CREATED); 
     }
 
     @PostMapping
-    public ResponseEntity<String> createBudget(@RequestBody Budget budget) {
-        return new ResponseEntity<>("Orçamento criado com sucesso.", HttpStatus.CREATED);
+    public ResponseEntity<String> createBudget(@RequestBody CreateBudgetDTO budgetDTO) {
+        try {
+            Budget budget = this.service.createBudget(budgetDTO);
+            return new ResponseEntity<>(Double.toString(budget.getTotalCost()), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateBudget(@PathVariable int id, @RequestBody Budget budget) {
-        return new ResponseEntity<>("Orçamento atualizado com sucesso.", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBudget(@PathVariable int id) {
-        return new ResponseEntity<>("Orçamento excluído com sucesso.", HttpStatus.OK);
-    }
 }

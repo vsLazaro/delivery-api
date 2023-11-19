@@ -1,4 +1,4 @@
-package com.trabalho.um.domain.Repository;
+package com.trabalho.um.domain.model;
 
 public class Promotion {
     private int id;
@@ -40,5 +40,25 @@ public class Promotion {
 
     public City getcity() {
         return this.city;
+    }
+
+    public double getBasicDiscount()
+    {
+        return this.basicDiscount;
+    }
+
+    public double getAdditionalDiscount()
+    {
+        return this.additionalDiscount;
+    }
+
+    public int getMinWeight()
+    {
+        return this.minWeight;
+    }
+
+    public int getMaxWeight()
+    {
+        return this.maxWeight;
     }
 }

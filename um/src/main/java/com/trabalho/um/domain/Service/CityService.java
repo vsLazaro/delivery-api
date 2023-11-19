@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.trabalho.um.domain.Repository.City;
 import com.trabalho.um.domain.Repository.ICepRepository;
 import com.trabalho.um.domain.Repository.ICitiesRepository;
+import com.trabalho.um.domain.model.City;
 
 @Service
-public class CityService {
+public class CityService implements ICityService {
   private ICitiesRepository citiesRepository;
   private ICepRepository cepRepository;
 
@@ -37,5 +37,27 @@ public class CityService {
   public ArrayList<City> getServedCities()
   {
     return this.citiesRepository.getAllCities();
+  }
+
+  public City getCityByCep(String cep) throws Exception
+  {
+    try {
+      if(!this.cepIsServed(cep)) {
+        throw new Exception("Não atendemos o CEP " + cep);
+      }
+      String cityName = this.cepRepository.getCityNameByCep(cep);
+      return this.citiesRepository.getCityByName(cityName);
+    } catch(Exception e) {
+      throw new Exception(e.getMessage());
+    }
+  }
+
+  public City geCityByName(String name) throws Exception
+  {
+    try {
+      return this.citiesRepository.getCityByName(name);
+    } catch(Exception e) {
+      throw new Exception(e.getMessage());
+    }
   }
 }

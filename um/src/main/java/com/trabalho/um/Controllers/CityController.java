@@ -1,6 +1,7 @@
 package com.trabalho.um.Controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trabalho.um.domain.Repository.City;
 import com.trabalho.um.domain.Service.CityService;
+import com.trabalho.um.domain.model.City;
 
 
 @RestController
@@ -31,9 +32,11 @@ public class CityController {
   }
 
   @GetMapping({"/cep/{cep}"})
-  public boolean cepIsServed(@PathVariable String cep)
+  public ResponseEntity<HashMap<String, Boolean>> cepIsServed(@PathVariable String cep)
   {
-    return this.service.cepIsServed(cep);
+    HashMap<String, Boolean> response = new HashMap<String, Boolean>();
+    response.put("message", this.service.cepIsServed(cep));
+    return new ResponseEntity<HashMap<String, Boolean>>(response, HttpStatus.OK);
   }
 
 }

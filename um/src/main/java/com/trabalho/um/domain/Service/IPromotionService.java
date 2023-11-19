@@ -1,13 +1,11 @@
 package com.trabalho.um.domain.Service;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
-
-import com.trabalho.um.domain.Repository.Promotion;
+import com.trabalho.um.DTO.CreatePromotionDTO;
+import com.trabalho.um.domain.model.City;
+import com.trabalho.um.domain.model.Promotion;
 
 public interface IPromotionService {
-    Promotion cadastraPromocao(Promotion promocao);   
-    List<Promotion> getAllPromotions();
-    Promotion getPromotionById(@PathVariable int id);
-    Boolean deletePromotion(int id);
+    public Promotion createPromotion(CreatePromotionDTO promotionDTO) throws Exception;
+    public Promotion hasPromotion(City city);
 }

@@ -1,7 +1,9 @@
 package com.trabalho.um.domain.Service;
 
+import com.trabalho.um.DTO.CreatePromotionDTO;
 import com.trabalho.um.domain.Repository.IPromotionRepository;
-import com.trabalho.um.domain.Repository.Promotion;
+import com.trabalho.um.domain.model.City;
+import com.trabalho.um.domain.model.Promotion;
 
 import java.util.List;
 
@@ -11,35 +13,37 @@ import org.springframework.stereotype.Service;
 public class PromotionService implements IPromotionService {
 
     private IPromotionRepository promotionRepository;
+    private ICityService cityService;
 
-    public PromotionService(IPromotionRepository promotionRepository) {
+    private int id = 1;
+
+    public PromotionService(IPromotionRepository promotionRepository, ICityService cityService) {
         this.promotionRepository = promotionRepository;
+        this.cityService = cityService;
     }
 
-    @Override
-    public Promotion cadastraPromocao(Promotion promocao) {
-        return promotionRepository.cadastraPromocao(promocao);
+    public Promotion createPromotion(CreatePromotionDTO promotionDTO) throws Exception {
+        try {
+            City city = this.cityService.geCityByName(promotionDTO.city);
+            int id = this.id;
+            this.id++;
+            Promotion promotion = new Promotion(promotionDTO.description, promotionDTO.basicDiscount, promotionDTO.additionalDiscount, city, promotionDTO.minWeight, promotionDTO.maxWeight, id);
+            return promotionRepository.createPromotion(promotion);
+        } catch(Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
-    public Promotion getPromotionById(int id) {
-        return promotionRepository.getPromotionById(id);
+    public Promotion hasPromotion(City city) {
+        for(Promotion promotion : this.promotionRepository.getAllPromotions()) {
+            if(promotion.getcity().getName() == city.getName() && promotion.isValid()) {
+                return promotion;
+            }
+        }
+        return null;
     }
 
-    public List<Promotion> getAllPromotions(){
-        return promotionRepository.getAllPromotions();
-    }
-
-    public Promotion createPromotion(Promotion promotion) {
-        return promotionRepository.cadastraPromocao(promotion);
-    }
-
-
-    public Promotion updatePromotion(int id, Promotion promotion) {
-        return promotionRepository.updatePromotion(id, promotion);
-    }
-
-    @Override
-    public Boolean deletePromotion(int id) {
-        return promotionRepository.deletePromotion(id);
+    public List<Promotion> getValidPromotions() {
+      return this.promotionRepository.getValidPromotions();
     }
 }
