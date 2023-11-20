@@ -1,10 +1,10 @@
-package com.example.namingserver;
+package com.engsoft2.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NamingServerApplicationTests {
+class ApiGatewayApplicationTests {
 
 	@Test
 	void contextLoads() {

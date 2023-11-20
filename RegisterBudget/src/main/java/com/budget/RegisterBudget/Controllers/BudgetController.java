@@ -1,4 +1,4 @@
-package com.trabalho.um.Controllers;
+package com.budget.RegisterBudget.Controllers;
 
 import java.util.List;
 
@@ -6,18 +6,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.trabalho.um.DTO.CreateBudgetDTO;
-import com.trabalho.um.DTO.ReadBudgetByDateDTO;
-import com.trabalho.um.Service.IBudgetService;
-import com.trabalho.um.domain.entity.BudgetJPA;
-import com.trabalho.um.proxy.BudgetProxy;
+import com.budget.RegisterBudget.DTO.CreateBudgetDTO;
+import com.budget.RegisterBudget.DTO.ReadBudgetByDateDTO;
+import com.budget.RegisterBudget.Service.IBudgetService;
+import com.budget.RegisterBudget.domain.entity.BudgetJPA;
+
+
+
 
 @RestController
 @RequestMapping("/budgets")
 public class BudgetController {
 
     private IBudgetService service;
-    private BudgetProxy proxy;
 
     public BudgetController(IBudgetService service) {
       this.service = service;

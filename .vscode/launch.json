@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-UmApplication<um>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.trabalho.um.UmApplication",
+            "projectName": "um",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
