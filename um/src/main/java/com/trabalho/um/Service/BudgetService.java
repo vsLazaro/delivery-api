@@ -1,8 +1,10 @@
 package com.trabalho.um.Service;
 
+import org.aspectj.internal.lang.annotation.ajcDeclarePrecedence;
 import org.springframework.stereotype.Service;
 
 import com.trabalho.um.DTO.CreateBudgetDTO;
+import com.trabalho.um.DTO.CreatePersistentBudgetDTO;
 import com.trabalho.um.Repository.IBudgetRepository;
 import com.trabalho.um.domain.entity.BudgetJPA;
 import com.trabalho.um.domain.entity.CityJPA;
@@ -29,7 +31,7 @@ public class BudgetService implements IBudgetService {
       return this.budgetRepository.getAllBudgets();
     }
 
-    public BudgetJPA createBudget(CreateBudgetDTO budgetDTO) throws Exception {
+    public CreatePersistentBudgetDTO createBudget(CreateBudgetDTO budgetDTO) throws Exception {
         try {
             CityJPA originCity = this.cityService.getCityByCep(budgetDTO.cepOrigin);
             CityJPA destinCity = this.cityService.getCityByCep(budgetDTO.cepDestiny);
@@ -45,7 +47,8 @@ public class BudgetService implements IBudgetService {
               discount += promotion.getBasicDiscount() + promotion.getAdditionalDiscount();
             }
             
-            BudgetJPA budget = new BudgetJPA(date, originCity.getName(), destinCity.getName(), weight, basicCost, adicionalCost, taxCost, discount);
+            double totalCost = basicCost + adicionalCost + taxCost - discount;
+            CreatePersistentBudgetDTO budget = new CreatePersistentBudgetDTO(date.toString(), originCity.getName(), destinCity.getName(), weight, basicCost, adicionalCost, taxCost, discount, totalCost);
             this.budgetRepository.createBudget(budget);
             return budget;
         } catch (Exception e) {

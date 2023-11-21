@@ -5,21 +5,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.trabalho.um.DTO.CreatePersistentBudgetDTO;
 import com.trabalho.um.Repository.IBudgetRepository;
 import com.trabalho.um.domain.entity.BudgetJPA;
 
-@Component
+
 public class BudgetsRepository implements IBudgetRepository {
 
   BudgetsRepositoryJPA budgetsRepositoryJPA;
 
   public BudgetsRepository(BudgetsRepositoryJPA budgetsRepositoryJPA) {
     this.budgetsRepositoryJPA = budgetsRepositoryJPA;
-  }
-
-  @Override
-  public void createBudget(BudgetJPA budget) {
-    this.budgetsRepositoryJPA.save(budget);
   }
 
   @Override
@@ -30,6 +26,12 @@ public class BudgetsRepository implements IBudgetRepository {
   @Override
   public List<BudgetJPA> getBudgetByDate(LocalDate date) {
     return this.budgetsRepositoryJPA.findByDate(date);
+  }
+
+  @Override
+  public void createBudget(CreatePersistentBudgetDTO budget) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'createBudget'");
   }
   
 }

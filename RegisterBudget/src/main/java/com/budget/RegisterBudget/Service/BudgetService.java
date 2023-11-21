@@ -3,6 +3,7 @@ package com.budget.RegisterBudget.Service;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import com.budget.RegisterBudget.DTO.CreateBudgetDTO;
@@ -27,7 +28,9 @@ public class BudgetService implements IBudgetService {
     @Override
     public BudgetJPA createBudget(CreateBudgetDTO budgetDTO) throws Exception {
         try {
-            BudgetJPA budget = new BudgetJPA(budgetDTO.date, budgetDTO.originCity, budgetDTO.destinyCity, budgetDTO.weight, budgetDTO.basicCost, budgetDTO.adicionalCost, budgetDTO.taxCost, budgetDTO.discount);
+            LocalDate date = LocalDate.parse(budgetDTO.date);
+            BudgetJPA budget = new BudgetJPA(date, budgetDTO.originCity, budgetDTO.destinyCity, budgetDTO.weight, budgetDTO.basicCost, budgetDTO.adicionalCost, budgetDTO.taxCost, budgetDTO.discount);
+            this.budgetRepository.createBudget(budget);
             return budget;
         } catch (Exception e) {
             throw new Exception("Error creating budget");

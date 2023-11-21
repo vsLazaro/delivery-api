@@ -1,7 +1,7 @@
 services:
   rabbitmq:
     image: rabbitmq:management
-    container_name: rabbitmq
+    container_name: rabbitmq-delivery
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
@@ -12,4 +12,3 @@ services:
       - delivery
 networks:
   delivery:
-    external: true

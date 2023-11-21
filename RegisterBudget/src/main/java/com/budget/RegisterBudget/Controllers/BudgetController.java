@@ -1,5 +1,6 @@
 package com.budget.RegisterBudget.Controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -7,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.budget.RegisterBudget.DTO.CreateBudgetDTO;
-import com.budget.RegisterBudget.DTO.ReadBudgetByDateDTO;
 import com.budget.RegisterBudget.Service.IBudgetService;
 import com.budget.RegisterBudget.domain.entity.BudgetJPA;
 
@@ -29,9 +29,9 @@ public class BudgetController {
         return new ResponseEntity<List<BudgetJPA>>(this.service.getAllBudgets(), HttpStatus.OK);
     }
 
-    @GetMapping({"/date"})
-    public ResponseEntity<List<BudgetJPA>> getBudgetByDate(@RequestBody ReadBudgetByDateDTO dateDTO) {
-        return new ResponseEntity<List<BudgetJPA>>(this.service.getBudgetByDate(dateDTO.date), HttpStatus.CREATED); 
+    @GetMapping({"/date/{date}"})
+    public ResponseEntity<List<BudgetJPA>> getBudgetByDate(@PathVariable LocalDate date) {
+        return new ResponseEntity<List<BudgetJPA>>(this.service.getBudgetByDate(date), HttpStatus.CREATED); 
     }
 
     @PostMapping

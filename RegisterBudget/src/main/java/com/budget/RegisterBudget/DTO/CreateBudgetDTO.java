@@ -3,7 +3,7 @@ package com.budget.RegisterBudget.DTO;
 import java.time.LocalDate;
 
 public class CreateBudgetDTO {
-  public LocalDate date;
+  public String date;
   public String originCity;
   public String destinyCity;
   public int weight;
